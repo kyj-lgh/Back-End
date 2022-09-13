@@ -1,14 +1,21 @@
 from django.db import models
-from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
-
+from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser, PermissionsMixin)
+from django.conf import settings
+import jwt
+from datetime import datetime, timedelta
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, date_of_birth, password=None):
+    def create_user(self, email, age, username, date_of_birth, password=None):
+        '''
+        주어진 이메일, 나이, 이름, 생일로 User 인스턴스 생성
+        '''
         if not email:
             raise ValueError('Users must have an email address')
 
         user = self.model(
             email=self.normalize_email(email),
+            age = age,
+            username = username,
             date_of_birth=date_of_birth,
         )
 
@@ -16,10 +23,16 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, date_of_birth, password):
+    def create_superuser(self, email, age, username, date_of_birth, password):
+        '''
+        주어진 이메일, 생일, 비밀번호로 User 인스턴스 생성
+        최상위 사용자이기 때문에 권한 부여
+        '''
         user = self.create_user(
             email,
             password=password,
+            age = age,
+            username = username, 
             date_of_birth=date_of_birth,
         )
         user.is_admin = True
@@ -33,6 +46,8 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
+    age = models.DecimalField(max_digits=200, decimal_places=0, blank = True)
+    username = models.CharField(max_length=255, blank=True)
     date_of_birth = models.DateField()
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -40,7 +55,7 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['date_of_birth']
+    REQUIRED_FIELDS = ['date_of_birth', 'age', 'username']
 
     def __str__(self):
         return self.email
@@ -57,3 +72,17 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+    
+    @property
+    def token(self):
+        return self._generate_jwt_token()
+    
+    def _generate_jwt_token(self):
+        dt = datetime.now() + timedelta(days = 60)
+        
+        token = jwt.encode({
+            'id' : self.pk,
+            'exp' : dt.utcfromtimestamp(dt.timestamp())
+        }, settings.SECRET_KET, algorithm = 'HS256')
+    
+        return token
