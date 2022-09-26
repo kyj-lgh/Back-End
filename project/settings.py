@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'cocktail',
     'rest_framework',
     'account',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -104,9 +105,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'account.backends.JWTAuthentication',
+    ),
 }
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
