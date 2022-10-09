@@ -1,9 +1,11 @@
+import re
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView
 from rest_framework.views import APIView
 from account.models import User
+from django.contrib.auth import get_user_model
 
 from account.serializers import UserCreateSerializer, LoginSerializer, UserListSerializer, UserUpdateSerializer
 
@@ -30,8 +32,10 @@ class LoginAPIView(APIView):
         user = request.data     #요청한 데이터를 받아오기        
         serializer = self.serializer_classes(data=user)       #직렬화
         serializer.is_valid(raise_exception=True)   #유효성 확인
-    
-        return Response(serializer.data, status = status.HTTP_200_OK)
+        # token = serializer.validate_data
+        user = get_user_model().objects.get(email = request.data["email"])
+
+        return Response({"token" : user.token}, status = status.HTTP_200_OK)
     
 class UserRetrieveUpdateView(RetrieveUpdateAPIView):
     permission_classes = (IsAuthenticated, )  #로그인한 사용자만 접근 가능

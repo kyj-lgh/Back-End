@@ -1,8 +1,8 @@
 from django.urls import path, include
 from account.views import UserCreateAPIView, LoginAPIView, UserListAPIView, UserRetrieveUpdateView
 urlpatterns = [
-    path('create/', UserCreateAPIView.as_view()),
-    path('login/', LoginAPIView.as_view()),
-    path('current', UserRetrieveUpdateView.as_view()),
-    path('user/', UserListAPIView.as_view()),
+    path('user/create/', UserCreateAPIView.as_view()),
+    path('user/login/', LoginAPIView.as_view()),
+    path('user/edit/', UserRetrieveUpdateView.as_view()),
+    path('user/list/', UserListAPIView.as_view()),
 ]

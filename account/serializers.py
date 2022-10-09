@@ -2,6 +2,7 @@ from rest_framework import serializers
 from account.models import User
 from django.contrib.auth import authenticate
 from django.utils import timezone
+# from rest_framework.authtoken.models import Token
 
 class UserCreateSerializer(serializers.ModelSerializer):
     
@@ -47,6 +48,7 @@ class LoginSerializer(serializers.Serializer):
         if not user.is_active:
             raise serializers.ValidationError('This user has been deactivated')
         
+        # token = Token.objects.get(user=user)
         user.last_login = timezone.now()
         user.save(update_fields = ['last_login'])
         
