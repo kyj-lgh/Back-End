@@ -6,24 +6,15 @@ class CocktailSerializer(serializers.ModelSerializer):
     ingredient = serializers.SlugRelatedField(slug_field='name', many=True, queryset = Ingredient.objects.all())
     class Meta:
         model = Cocktail 
-        fields = ['id', 'category', 'name', 'alcohol', 'ingredient', 'image', 'create_dt', 'bookmark']
+        fields = ['id', 'category', 'name', 'alcohol', 'ingredient', 'image', 'create_dt', 'update_dt', 'bookmark']
         
         
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['name']
+        fields = '__all__'
         
-class IngerdientSerializer(serializers.ModelSerializer):
+class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ingredient
-        fields = ['name']
-        
-        
-# class CocktailCreateSerializer(serializers.ModelSerializer):
-#     category = serializers.SlugRelatedField(slug_field='name', queryset = Category.objects.all())
-#     ingredient = serializers.SlugRelatedField(slug_field='name', many=True, queryset = Ingredient.objects.all())
-#     class Meta:
-#         model = Cocktail
-#         fileds='__all__'
-#         exclude= ['update_dt']
+        fields = '__all__'
