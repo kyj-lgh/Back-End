@@ -2,7 +2,6 @@ from django.urls import path, include
 from django.contrib import admin
 from cocktail.views import CocktailAPIView, CocktailDetailAPIView, CategoryAPIView, CategoryDetailAPIView, IngredientAPIView, IngredientDetailAPIView
 urlpatterns = [
-    path('account/', include('account.urls')),
     path('', CocktailAPIView.as_view()),
     path('<int:pk>/', CocktailDetailAPIView.as_view()),
     path('category/', CategoryAPIView.as_view()),

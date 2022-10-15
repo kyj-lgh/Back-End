@@ -4,6 +4,7 @@ from account.models import *
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from account.forms import UserChangeForm, UserCreationForm
+from posts.models import Post
 
 
 class UserAdmin(BaseUserAdmin):
