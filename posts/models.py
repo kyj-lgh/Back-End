@@ -4,7 +4,7 @@ from cocktail.models import User, Category
 #유저 게시글, 자신만의 레시피 표현
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete= models.CASCADE)
-    post_category = models.ForeignKey('cocktail.Category', on_delete = models.CASCADE)
+    post_category = models.ForeignKey('cocktail.Category', on_delete = models.CASCADE, null=True)
     title = models.CharField('TITLE', max_length=50)
     content = models.TextField('CONTENT')
     create_dt = models.DateTimeField('CREATE DT', auto_now_add=True)
