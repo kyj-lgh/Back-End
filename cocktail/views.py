@@ -9,24 +9,24 @@ from cocktail.serializers import CategorySerializer, CocktailSerializer, Ingredi
 from cocktail.permissions import CustomReadOnly
 
 class CocktailAPIView(ListCreateAPIView):   #칵테일 리스트, 생성 API
-    permission_classes=(CustomReadOnly, )
+    permission_classes=(AllowAny, )
     queryset = Cocktail.objects.all()
     serializer_class = CocktailSerializer  
 
 class CocktailDetailAPIView(RetrieveUpdateDestroyAPIView):      #수정, 삭제 API
-    permission_classes=(CustomReadOnly, )
+    permission_classes=(AllowAny, )
     serializer_class = CocktailSerializer
     
     def get_queryset(self):
         return Cocktail.objects.filter(pk = self.kwargs["pk"])     #kwargs = pk 전달 용도
     
 class CategoryAPIView(ListCreateAPIView):
-    permission_classes=(CustomReadOnly, )
+    permission_classes=(AllowAny, )
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     
 class CategoryDetailAPIView(RetrieveUpdateDestroyAPIView):
-    permission_classes=(CustomReadOnly, )
+    permission_classes=(AllowAny, )
     serializer_class = CategorySerializer
     
     def get_queryset(self):
@@ -34,12 +34,12 @@ class CategoryDetailAPIView(RetrieveUpdateDestroyAPIView):
     
     
 class IngredientAPIView(ListCreateAPIView):
-    permission_classes=(CustomReadOnly, )
+    permission_classes=(AllowAny, )
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
     
 class IngredientDetailAPIView(RetrieveUpdateDestroyAPIView):
-    permission_classes=(CustomReadOnly, )
+    permission_classes=(AllowAny, )
     serializer_class = IngredientSerializer
     
     def get_queryset(self):
