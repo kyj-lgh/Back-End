@@ -61,7 +61,7 @@ class LoginAPIView(APIView):
 #         return Response(serializer.data, status = status.HTTP_200_OK)
 
 class UserDetailAPIView(RetrieveUpdateDestroyAPIView):
-    permission_classes=(IsAuthenticatedOrReadOnly,)
+    permission_classes=(CustomReadOnly,)
     serializer_class = UserSerializer
     
     def get_queryset(self):
