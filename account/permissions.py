@@ -1,0 +1,13 @@
+from rest_framework import permissions
+
+class CustomReadOnly(permissions.BasePermission):
+    #메뉴 조회 : 누구나, 메뉴 생성,수정,삭제 : 관리자만
+    def has_permission(self, request, view):
+        if request.method == "GET":
+            return True
+        return request.user.is_authenticated
+    
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return obj.pk == request.user
