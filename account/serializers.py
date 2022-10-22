@@ -17,7 +17,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = ['email', 'age', 'username', 'date_of_birth', 'password', 'token']
+        fields = ['email', 'age', 'username', 'date_of_birth', 'password', 'token', 'is_admin']
         
     def create(self, validated_data):   #create method
         return User.objects.create_user(**validated_data)
@@ -92,7 +92,7 @@ class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = ['email', 'age', 'username', 'date_of_birth', 'password', 'token']
+        fields = ['email', 'age', 'username', 'date_of_birth', 'password', 'token', 'is_admin']
         
         read_only_fields = ('token',)
     
@@ -100,5 +100,7 @@ class UserSerializer(serializers.ModelSerializer):
 class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'username', 'age', 'date_of_birth', 'token']
+        fields = ['id', 'email', 'username', 'age', 'date_of_birth', 'token', 'is_admin']
+        
+        read_only_fields = ('is_admin',)
         

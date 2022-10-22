@@ -75,7 +75,7 @@ class User(AbstractBaseUser):
     
     @property
     def token(self):
-        return self._generate_jwt_token( )
+        return self._generate_jwt_token()
 
     def _generate_jwt_token(self):
         dt = datetime.now( ) + timedelta(days=60)
