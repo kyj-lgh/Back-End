@@ -10,7 +10,7 @@ from cocktail.serializers import CategorySerializer, CocktailSerializer, Ingredi
 from cocktail.permissions import CustomReadOnly
 
 class CocktailAPIView(ListCreateAPIView):   #칵테일 리스트, 생성 API
-    permission_classes=(AllowAny, )
+    permission_classes=(CustomReadOnly, )
     queryset = Cocktail.objects.all()
     serializer_class = CocktailSerializer  
     
@@ -20,7 +20,7 @@ class CocktailAPIView(ListCreateAPIView):   #칵테일 리스트, 생성 API
     
 
 class CocktailDetailAPIView(RetrieveUpdateDestroyAPIView):      #수정, 삭제 API
-    permission_classes=(IsAuthenticated, )
+    permission_classes=(CustomReadOnly, )
     serializer_class = CocktailSerializer
     
     def get_queryset(self):
