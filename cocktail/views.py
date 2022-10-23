@@ -14,9 +14,9 @@ class CocktailAPIView(ListCreateAPIView):   #칵테일 리스트, 생성 API
     queryset = Cocktail.objects.all()
     serializer_class = CocktailSerializer  
     
-    def post(self, request):
-        print(request.headers)
-        return HttpResponse("test..")
+    # def post(self, request):
+    #     print(request.headers)
+    #     return HttpResponse("test..")
     
 
 class CocktailDetailAPIView(RetrieveUpdateDestroyAPIView):      #수정, 삭제 API
