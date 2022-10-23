@@ -10,7 +10,6 @@ class Cocktail(models.Model):
     image = models.ImageField('IMAGE', upload_to='media/cocktail/', blank=True, null=True)
     create_dt = models.DateTimeField('CREATE DT', auto_now_add=True)
     update_dt = models.DateTimeField('UPDATE DT', auto_now=True)
-    bookmark = models.ManyToManyField(User, blank=True) #즐겨찾기 기능
 
     class Meta:
         ordering = ('update_dt',)

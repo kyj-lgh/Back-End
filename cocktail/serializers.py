@@ -6,7 +6,7 @@ class CocktailSerializer(serializers.ModelSerializer):
     ingredient = serializers.SlugRelatedField(slug_field='name', many=True, queryset = Ingredient.objects.all())
     class Meta:
         model = Cocktail 
-        fields = ['id', 'cocktail_category', 'name', 'alcohol', 'ingredient', 'image', 'create_dt', 'update_dt', 'bookmark']
+        fields = ['id', 'cocktail_category', 'name', 'alcohol', 'ingredient', 'image', 'create_dt', 'update_dt']
         
         
 class CategorySerializer(serializers.ModelSerializer):
