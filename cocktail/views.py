@@ -1,3 +1,4 @@
+from django.shortcuts import HttpResponse
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
@@ -12,6 +13,11 @@ class CocktailAPIView(ListCreateAPIView):   #칵테일 리스트, 생성 API
     permission_classes=(IsAuthenticated, )
     queryset = Cocktail.objects.all()
     serializer_class = CocktailSerializer  
+    
+    def post(self, request):
+        print(request.headers)
+        return HttpResponse("test..")
+    
 
 class CocktailDetailAPIView(RetrieveUpdateDestroyAPIView):      #수정, 삭제 API
     permission_classes=(IsAuthenticated, )
