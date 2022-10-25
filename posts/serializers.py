@@ -8,7 +8,7 @@ class CommentSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(slug_field='username', read_only=True)
     class Meta:
         model = Comment
-        fields = ['id', 'post', 'author', 'content']
+        fields = ['author', 'content']
         
 class CommentCreateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,6 +20,7 @@ class CommentCreateSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(slug_field='username', read_only=True)
     comments = CommentSerializer(many=True, read_only=True) 
+    post_category = serializers.SlugRelatedField(slug_field='name', queryset = Category.objects.all())
     class Meta:
         model=Post
         fields = ['id', 'author', 'post_category', 'title', 'content', 'create_dt', 'comments']
