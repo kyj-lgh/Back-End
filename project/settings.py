@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['3.39.226.145',
                  'ec2-3-39-226-145.ap-northeast-2.compute.amazonaws.com',
                  '127.0.0.1',
-                 'mycocktail-env.eba-gpmshh65.ap-northeast-2.elasticbeanstalk.com']
+                 'cocktail-env.eba-gpmshh65.ap-northeast-2.elasticbeanstalk.com']
 
 
 # Application definition
