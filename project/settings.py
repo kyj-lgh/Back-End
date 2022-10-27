@@ -29,7 +29,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['3.39.226.145',
                  'ec2-3-39-226-145.ap-northeast-2.compute.amazonaws.com',
                  '127.0.0.1',
-                 '.mycocktail.shop',]
+                 'mycocktail.shop',
+                 '172.31.32.81']
 
 
 # Application definition
