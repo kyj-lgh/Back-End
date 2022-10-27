@@ -145,7 +145,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'account.User'
 
 CORS_ORIGIN_WHITELIST=['http://127.0.0.1:3000',
-                      'http://localhost:3000',]
+                      'http://localhost:3000',
+                      'https://mycocktail.shop',]
 CORS_ALLOW_CREDENTIALS = True
 
 # CORS_ORIGIN_ALLOW_ALL = True
